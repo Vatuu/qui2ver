@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "package": "dev.vatuu.qui2ver.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "modid.refmap.json",
+  "mixins": [
+    "InventoryScreenMixin",
+    "PlayerContainerMixin",
+    "PlayerInventoryMixin",
+    "PlayerEntityMixin",
+    "PlayerRendererMixin",
+    "ModelBakeryMixin",
+    "CreativeScreenMixin",
+    "SlotAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

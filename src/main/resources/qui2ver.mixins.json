@@ -2,7 +2,7 @@
   "required": true,
   "package": "dev.vatuu.qui2ver.mixins",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "modid.refmap.json",
+  "refmap": "qui2ver.refmap.json",
   "mixins": [
     "InventoryScreenMixin",
     "PlayerContainerMixin",

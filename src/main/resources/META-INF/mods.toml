@@ -8,7 +8,6 @@ version="${version}"
 
 displayName="Quiver Restoration"
 authors="Vatuu"
-# A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="examplemod.png" #optional
+logoFile="icon.png"
 description="This sure is a description."
 credits="Have you tried FabricMC yet?"

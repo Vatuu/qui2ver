@@ -16,6 +16,10 @@ out
 # gradle
 build
 .gradle
+gradle
+src/main/generated_resources
+gradlew
+gradlew.bat
 
 # other
 eclipse

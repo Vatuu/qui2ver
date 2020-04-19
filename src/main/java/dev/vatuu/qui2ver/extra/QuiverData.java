@@ -49,7 +49,7 @@ public class QuiverData {
             ConditionalRecipe.builder()
                 .addCondition(TrueCondition.INSTANCE)
                 .addRecipe(
-                    ShapedRecipeBuilder.shapedRecipe(Qui2ver.quiverItem.get())
+                    ShapedRecipeBuilder.shapedRecipe(Qui2ver.QUIVER_ITEM.get())
                         .patternLine("sl ")
                         .patternLine("l l")
                         .patternLine("il ")
@@ -98,7 +98,7 @@ public class QuiverData {
         }
 
         protected void addTranslations() {
-            add(Qui2ver.quiverItem.get(), "Quiver");
+            add(Qui2ver.QUIVER_ITEM.get(), "Quiver");
         }
     }
 }

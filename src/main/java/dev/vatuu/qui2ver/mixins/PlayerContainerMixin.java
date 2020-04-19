@@ -1,6 +1,7 @@
 package dev.vatuu.qui2ver.mixins;
 
 import dev.vatuu.qui2ver.QuiverSlot;
+import dev.vatuu.qui2ver.interfaces.IPlayerContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;
@@ -17,9 +18,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(PlayerContainer.class)
-public abstract class PlayerContainerMixin extends RecipeBookContainer<CraftingInventory> {
+public abstract class PlayerContainerMixin extends RecipeBookContainer<CraftingInventory> implements IPlayerContainer {
 
-    @Unique private int quiverIndex, arrowIndex;
+    @Unique public int quiverIndex, arrowIndex;
 
     public PlayerContainerMixin() {
         super(null, 0);
@@ -51,5 +52,13 @@ public abstract class PlayerContainerMixin extends RecipeBookContainer<CraftingI
                 //Don't even try to understand this, just trust me.
             }
         }
+    }
+
+    public int getQuiverSlotId() {
+        return quiverIndex;
+    }
+
+    public int getArrowSlotId() {
+        return arrowIndex;
     }
 }

@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
 
@@ -31,7 +32,7 @@ public class QuiverSlot extends Slot {
     }
 
     public boolean isItemValid(ItemStack stack) {
-        return stack.getItem().equals(Qui2ver.quiverItem.get());
+        return stack.getItem().equals(Qui2ver.QUIVER_ITEM.get());
     }
 
     public boolean canTakeStack(PlayerEntity p) {
@@ -58,7 +59,7 @@ public class QuiverSlot extends Slot {
         }
 
         public boolean isItemValid(ItemStack stack) {
-            return stack.getItem() instanceof ArrowItem;
+            return stack.getItem().isIn(Tags.Items.ARROWS);
         }
     }
 }

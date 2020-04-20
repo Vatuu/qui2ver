@@ -1,13 +1,13 @@
 package dev.vatuu.qui2ver.mixins;
 
 import dev.vatuu.qui2ver.QuiverSlot;
+import dev.vatuu.qui2ver.network.QuiverListener;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.inventory.container.RecipeBookContainer;
-import net.minecraft.inventory.container.Slot;
+import net.minecraft.inventory.container.*;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,8 +27,9 @@ public abstract class PlayerContainerMixin extends RecipeBookContainer<CraftingI
 
     @Inject(at = @At("RETURN"), method = "<init>")
     private void init(PlayerInventory inv, boolean local, PlayerEntity player, CallbackInfo info) {
-        quiverIndex = this.addSlot(new QuiverSlot(inv)).slotNumber;
-        arrowIndex = this.addSlot(new QuiverSlot.ArrowSlot(inv)).slotNumber;
+        quiverIndex = this.addSlot(new QuiverSlot(player)).slotNumber;
+        arrowIndex = this.addSlot(new QuiverSlot.ArrowSlot(player)).slotNumber;
+        this.addListener(new QuiverListener(quiverIndex, arrowIndex, player));
     }
 
     @Inject(at = @At(value = "CONSTANT", args = {"intValue=36"}, ordinal = 0), method = "transferStackInSlot", cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)

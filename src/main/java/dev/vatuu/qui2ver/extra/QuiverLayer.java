@@ -3,6 +3,7 @@ package dev.vatuu.qui2ver.extra;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import dev.vatuu.qui2ver.Qui2ver;
+import dev.vatuu.qui2ver.capability.IQuiverInventory;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -27,7 +28,7 @@ public class QuiverLayer extends LayerRenderer<AbstractClientPlayerEntity, Playe
 
     @Override
     public void render(MatrixStack mat, IRenderTypeBuffer buffer, int lights, AbstractClientPlayerEntity p, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        ItemStack stack = p.inventory.getStackInSlot(41);
+        ItemStack stack = IQuiverInventory.get(p).getStackInSlot(0);
         if(!stack.isEmpty() && p.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() != Items.ELYTRA && !p.isInvisible() && !p.isWearing(PlayerModelPart.CAPE)) {
             mat.push();
             this.getEntityModel().setModelAttributes(modelQuiver);

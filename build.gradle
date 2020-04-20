@@ -70,14 +70,17 @@ minecraft {
 }
 
 repositories{
-    maven {url='https://dist.creeper.host/Sponge/maven'}
-
+    maven { url = 'https://dist.creeper.host/Sponge/maven' }
+    maven { url = 'https://maven.blamejared.com/' }
     jcenter()
     mavenCentral()
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+
+    implementation fg.deobf("vazkii.quark:Quark:r2.1-231.1063")
+    implementation fg.deobf("vazkii.autoreglib:AutoRegLib:1.5-40.79")
 
     compile 'org.spongepowered:mixin:0.8'
 }

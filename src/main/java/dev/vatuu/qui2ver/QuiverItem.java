@@ -1,5 +1,6 @@
 package dev.vatuu.qui2ver;
 
+import dev.vatuu.qui2ver.capability.IQuiverInventory;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
@@ -39,9 +40,10 @@ public class QuiverItem extends Item {
             return false;
         } else {
             ServerPlayerEntity p = list.get(0);
-            if (p.inventory.getStackInSlot(41).isEmpty()) {
+            IQuiverInventory cap = IQuiverInventory.get(p);
+            if (cap.getStackInSlot(0).isEmpty()) {
                 ItemStack equip = stack.split(1);
-                p.inventory.setInventorySlotContents(41, equip);
+                cap.setStackInSlot(0, equip);
                 src.getWorld().playSound(null, p.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1, 1);
                 return true;
             }
@@ -52,11 +54,12 @@ public class QuiverItem extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity p, Hand hand) {
         ItemStack stack = p.getHeldItem(hand);
-        ItemStack slot = p.inventory.getStackInSlot(41);
+        IQuiverInventory cap = IQuiverInventory.get(p);
+        ItemStack slot = cap.getStackInSlot(0);
         if (slot.isEmpty()) {
             ItemStack equip = stack.copy();
             equip.setCount(1);
-            p.inventory.setInventorySlotContents(41, equip);
+            cap.setStackInSlot(0, equip);
             world.playSound(null, p.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1, 1);
             if(!p.isCreative())
                 stack.shrink(1);

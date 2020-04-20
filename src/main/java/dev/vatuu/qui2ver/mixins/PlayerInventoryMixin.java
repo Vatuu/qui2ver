@@ -1,6 +1,8 @@
 package dev.vatuu.qui2ver.mixins;
 
 import com.google.common.collect.ImmutableList;
+import dev.vatuu.qui2ver.capability.IQuiverInventory;
+import net.minecraft.command.impl.ClearCommand;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -27,39 +29,28 @@ public abstract class PlayerInventoryMixin implements IInventory, INameable {
     @Shadow @Mutable
     private List<NonNullList<ItemStack>> allInventories;
     public final NonNullList<ItemStack> quiverInventory = NonNullList.withSize(2, ItemStack.EMPTY);
+    private IQuiverInventory capability;
 
     @Inject(at = @At("RETURN"), method = "<init>")
     private void init(PlayerEntity p, CallbackInfo info) {
         List<NonNullList<ItemStack>> list = new ArrayList<>(allInventories);
         list.add(quiverInventory);
         this.allInventories = ImmutableList.copyOf(list);
+        this.capability = IQuiverInventory.get(p);
     }
 
     @Inject(at = @At(value = "RETURN"), method = "write", cancellable = true)
     private void write(ListNBT nbt, CallbackInfoReturnable<ListNBT> info) {
-        ListNBT ret = info.getReturnValue();
-
-        for(int i = 0; i < this.quiverInventory.size(); ++i)
-            if (!this.quiverInventory.get(i).isEmpty()) {
-                CompoundNBT tag = new CompoundNBT();
-                tag.putByte("Slot", (byte)(i + 160));
-                this.quiverInventory.get(i).write(tag);
-                ret.add(tag);
-            }
-
-        info.setReturnValue(ret);
+        capability.setStackInSlot(0, quiverInventory.get(0));
+        capability.setStackInSlot(1, quiverInventory.get(1));
     }
 
     @Inject(at = @At("HEAD"), method = "read")
     private void read(ListNBT nbt, CallbackInfo info) {
         quiverInventory.clear();
-    }
 
-    @Inject(at = @At(value = "INVOKE_ASSIGN", shift = At.Shift.AFTER, target = "Lnet/minecraft/item/ItemStack;read(Lnet/minecraft/nbt/CompoundNBT;)Lnet/minecraft/item/ItemStack;"), method = "read", locals = LocalCapture.CAPTURE_FAILHARD)
-    private void readLater(ListNBT nbt, CallbackInfo info, int index, CompoundNBT compoundnbt, int slot, ItemStack stack) {
-        if(!stack.isEmpty() &&  slot >= 160 && slot <= quiverInventory.size() + 160) {
-            this.quiverInventory.set(slot - 160, stack);
-        }
+        this.quiverInventory.set(0, capability.getStackInSlot(0));
+        this.quiverInventory.set(1, capability.getStackInSlot(1));
     }
 
     @Inject(at = @At("RETURN"), method = "getSizeInventory", cancellable = true)

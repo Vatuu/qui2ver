@@ -4,17 +4,13 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "qui2ver.refmap.json",
   "mixins": [
-
     "PlayerContainerMixin",
     "PlayerInventoryMixin",
-    "PlayerEntityMixin",
-    "SlotAccessor"
+    "PlayerEntityMixin"
   ],
   "client": [
-    "InventoryScreenMixin",
-    "PlayerRendererMixin",
-    "CreativeScreenMixin",
-    "ModelBakeryMixin"
+    "CreativeSlotAccessor",
+    "SlotAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

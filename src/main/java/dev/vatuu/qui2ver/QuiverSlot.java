@@ -1,7 +1,9 @@
 package dev.vatuu.qui2ver;
 
 import com.mojang.datafixers.util.Pair;
+import dev.vatuu.qui2ver.capability.IQuiverInventory;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.inventory.container.Slot;
@@ -11,15 +13,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nullable;
 
-public class QuiverSlot extends Slot {
+public class QuiverSlot extends SlotItemHandler {
 
     public static final ResourceLocation QUIVER_SLOT_EMPTY = new ResourceLocation("qui2ver", "item/empty_quiver_slot");
 
-    public QuiverSlot(IInventory inv) {
-        super(inv, 41, 77, 8);
+    public QuiverSlot(PlayerEntity p) {
+        super(IQuiverInventory.get(p), 0, 77, 8);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -35,17 +38,12 @@ public class QuiverSlot extends Slot {
         return stack.getItem().equals(Qui2ver.QUIVER_ITEM.get());
     }
 
-    public boolean canTakeStack(PlayerEntity p) {
-        p.dropItem(this.inventory.removeStackFromSlot(42), false, true);
-        return true;
-    }
-
-    public static class ArrowSlot extends Slot {
+    public static class ArrowSlot extends SlotItemHandler {
 
         public static final ResourceLocation ARROW_SLOT_EMPTY = new ResourceLocation("qui2ver", "item/empty_arrow_slot");
 
-        public ArrowSlot(IInventory inv) {
-            super(inv, 42, 77, 26);
+        public ArrowSlot(PlayerEntity p) {
+            super(IQuiverInventory.get(p), 1, 77, 26);
         }
 
         @Nullable
@@ -55,11 +53,7 @@ public class QuiverSlot extends Slot {
         }
 
         public boolean isEnabled() {
-            return !inventory.getStackInSlot(41).isEmpty();
-        }
-
-        public boolean isItemValid(ItemStack stack) {
-            return stack.getItem().isIn(Tags.Items.ARROWS);
+            return !getItemHandler().getStackInSlot(0).isEmpty();
         }
     }
 }

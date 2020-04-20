@@ -1,6 +1,7 @@
 package dev.vatuu.qui2ver.mixins;
 
 import com.mojang.authlib.GameProfile;
+import dev.vatuu.qui2ver.capability.IQuiverInventory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,7 +29,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(at = @At(value = "INVOKE_ASSIGN", shift = At.Shift.BEFORE, target = "Lnet/minecraft/item/ShootableItem;getAmmoPredicate()Ljava/util/function/Predicate;"), method = "findAmmo", cancellable = true)
     private void findAmmo(ItemStack stack, CallbackInfoReturnable<ItemStack> info) {
-        ItemStack arrowSlot = this.inventory.getStackInSlot(42);
+        ItemStack arrowSlot = IQuiverInventory.get((PlayerEntity)(Object) this).getStackInSlot(1);
         if(!arrowSlot.isEmpty()) {
             info.setReturnValue(arrowSlot);
         }

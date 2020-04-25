@@ -2,12 +2,10 @@ package dev.vatuu.qui2ver.mixins;
 
 import com.google.common.collect.ImmutableList;
 import dev.vatuu.qui2ver.capability.IQuiverInventory;
-import net.minecraft.command.impl.ClearCommand;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.INameable;
 import net.minecraft.util.NonNullList;
@@ -18,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,20 +34,6 @@ public abstract class PlayerInventoryMixin implements IInventory, INameable {
         list.add(quiverInventory);
         this.allInventories = ImmutableList.copyOf(list);
         this.capability = IQuiverInventory.get(p);
-    }
-
-    @Inject(at = @At(value = "RETURN"), method = "write", cancellable = true)
-    private void write(ListNBT nbt, CallbackInfoReturnable<ListNBT> info) {
-        capability.setStackInSlot(0, quiverInventory.get(0));
-        capability.setStackInSlot(1, quiverInventory.get(1));
-    }
-
-    @Inject(at = @At("HEAD"), method = "read")
-    private void read(ListNBT nbt, CallbackInfo info) {
-        quiverInventory.clear();
-
-        this.quiverInventory.set(0, capability.getStackInSlot(0));
-        this.quiverInventory.set(1, capability.getStackInSlot(1));
     }
 
     @Inject(at = @At("RETURN"), method = "getSizeInventory", cancellable = true)

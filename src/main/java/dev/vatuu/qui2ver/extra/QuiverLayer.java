@@ -29,7 +29,7 @@ public class QuiverLayer extends LayerRenderer<AbstractClientPlayerEntity, Playe
     @Override
     public void render(MatrixStack mat, IRenderTypeBuffer buffer, int lights, AbstractClientPlayerEntity p, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         ItemStack stack = IQuiverInventory.get(p).getStackInSlot(0);
-        if(!stack.isEmpty() && p.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() != Items.ELYTRA && !p.isInvisible() && !p.isWearing(PlayerModelPart.CAPE)) {
+        if(!stack.isEmpty() && p.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() != Items.ELYTRA && !p.isInvisible() && p.getLocationCape() == null) {
             mat.push();
             this.getEntityModel().setModelAttributes(modelQuiver);
             mat.translate(-0.55D, -1.9D, 0.195D);

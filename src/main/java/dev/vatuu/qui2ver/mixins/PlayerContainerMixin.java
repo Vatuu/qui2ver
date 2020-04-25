@@ -1,7 +1,7 @@
 package dev.vatuu.qui2ver.mixins;
 
-import dev.vatuu.qui2ver.QuiverSlot;
-import dev.vatuu.qui2ver.network.QuiverListener;
+import dev.vatuu.qui2ver.Qui2ver;
+import dev.vatuu.qui2ver.capability.QuiverSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;
@@ -26,9 +26,8 @@ public abstract class PlayerContainerMixin extends RecipeBookContainer<CraftingI
 
     @Inject(at = @At("RETURN"), method = "<init>")
     private void init(PlayerInventory inv, boolean local, PlayerEntity player, CallbackInfo info) {
-        quiverIndex = this.addSlot(new QuiverSlot(player)).slotNumber;
-        arrowIndex = this.addSlot(new QuiverSlot.ArrowSlot(player)).slotNumber;
-        this.addListener(new QuiverListener(quiverIndex, arrowIndex, player));
+        quiverIndex = this.addSlot(new QuiverSlot(player, 0, 77, 8, Qui2ver.QUIVER_SLOT_EMPTY, true)).slotNumber;
+        quiverIndex = this.addSlot(new QuiverSlot(player, 1, 77, 26, Qui2ver.ARROW_SLOT_EMPTY, false, (i) -> !i.getStackInSlot(0).isEmpty())).slotNumber;
     }
 
     @Inject(at = @At(value = "CONSTANT", args = {"intValue=36"}, ordinal = 0), method = "transferStackInSlot", cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
@@ -48,7 +47,6 @@ public abstract class PlayerContainerMixin extends RecipeBookContainer<CraftingI
                     s.onTake(p, stack1);
 
                 info.setReturnValue(ItemStack.EMPTY);
-                //Don't even try to understand this, just trust me.
             }
         }
     }

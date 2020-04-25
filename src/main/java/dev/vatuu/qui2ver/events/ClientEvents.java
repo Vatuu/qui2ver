@@ -1,10 +1,10 @@
 package dev.vatuu.qui2ver.events;
 
 import dev.vatuu.qui2ver.Qui2ver;
-import dev.vatuu.qui2ver.QuiverSlot;
 import dev.vatuu.qui2ver.capability.IQuiverInventory;
 import dev.vatuu.qui2ver.mixins.CreativeSlotAccessor;
 import dev.vatuu.qui2ver.mixins.SlotAccessor;
+import dev.vatuu.qui2ver.capability.QuiverSlot;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.CreativeScreen;
@@ -42,7 +42,7 @@ public final class ClientEvents {
                 ((CreativeScreen) gui).getContainer().inventorySlots.stream()
                     .filter(slot -> slot instanceof CreativeSlotAccessor)
                     .map(CreativeSlotAccessor.class::cast)
-                    .filter(slot -> slot.getSlot() instanceof QuiverSlot || slot.getSlot() instanceof QuiverSlot.ArrowSlot).forEach(s -> {
+                    .filter(slot -> slot.getSlot() instanceof QuiverSlot).forEach(s -> {
                         if(s.getSlot().getSlotIndex() == 0)
                             ((SlotAccessor)s).setXPos(127);
                         else
@@ -63,8 +63,8 @@ public final class ClientEvents {
 
     public static void onTextureStitch(TextureStitchEvent.Pre e) {
         if(e.getMap().getBasePath() == AtlasTexture.LOCATION_BLOCKS_TEXTURE) {
-            e.addSprite(QuiverSlot.QUIVER_SLOT_EMPTY);
-            e.addSprite(QuiverSlot.ArrowSlot.ARROW_SLOT_EMPTY);
+            e.addSprite(Qui2ver.QUIVER_SLOT_EMPTY);
+            e.addSprite(Qui2ver.ARROW_SLOT_EMPTY);
         }
     }
 

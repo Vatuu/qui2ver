@@ -34,11 +34,10 @@ public final class CommonEvents {
     public static void onPickup(EntityItemPickupEvent e) {
         ItemStack itemstack = e.getItem().getItem();
         IQuiverInventory inv = IQuiverInventory.get(e.getPlayer());
-        ItemStack slot = inv.insertItem(1, itemstack, false);
+        ItemStack slot = inv.insertItem(1, itemstack.copy(), false);
         itemstack.setCount(slot.getCount());
         if(slot.isEmpty() || !ItemStack.areItemStacksEqual(itemstack, slot)) {
-            if(slot.isEmpty())
-                e.getPlayer().onItemPickup(e.getItem(), slot.getCount());
+            e.getPlayer().onItemPickup(e.getItem(), slot.getCount());
         }
     }
 

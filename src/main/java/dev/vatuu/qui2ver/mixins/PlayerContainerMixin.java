@@ -2,6 +2,10 @@ package dev.vatuu.qui2ver.mixins;
 
 import dev.vatuu.qui2ver.Qui2ver;
 import dev.vatuu.qui2ver.capability.QuiverSlot;
+import net.minecraft.client.renderer.entity.model.IllagerModel;
+import net.minecraft.client.renderer.entity.model.VillagerModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.tileentity.EnchantmentTableTileEntityRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;

@@ -9,8 +9,8 @@
     "PlayerEntityMixin"
   ],
   "client": [
-    "CreativeSlotAccessor",
-    "SlotAccessor"
+    "accessors.CreativeSlotAccessor",
+    "accessors.SlotAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

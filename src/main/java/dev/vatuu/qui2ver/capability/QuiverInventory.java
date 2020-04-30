@@ -25,8 +25,8 @@ public class QuiverInventory extends ItemStackHandler implements IQuiverInventor
 
     @Override
     protected void onContentsChanged(int slot) {
-        if(!entity.getEntityWorld().isRemote) {
-            if(getStackInSlot(0).isEmpty() && !getStackInSlot(1).isEmpty()) {
+        if(!entity.getEntityWorld().isRemote && slot == 0) {
+            if(!getStackInSlot(1).isEmpty()) {
                 entity.dropItem(getStackInSlot(1).copy(), false, true);
                 this.setStackInSlot(1, ItemStack.EMPTY);
             }

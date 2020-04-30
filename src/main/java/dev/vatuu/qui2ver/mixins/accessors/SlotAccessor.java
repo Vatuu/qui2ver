@@ -1,4 +1,4 @@
-package dev.vatuu.qui2ver.mixins;
+package dev.vatuu.qui2ver.mixins.accessors;
 
 import net.minecraft.inventory.container.Slot;
 import org.spongepowered.asm.mixin.Mixin;

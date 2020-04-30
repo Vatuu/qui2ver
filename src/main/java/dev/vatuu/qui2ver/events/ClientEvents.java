@@ -2,8 +2,8 @@ package dev.vatuu.qui2ver.events;
 
 import dev.vatuu.qui2ver.Qui2ver;
 import dev.vatuu.qui2ver.capability.IQuiverInventory;
-import dev.vatuu.qui2ver.mixins.CreativeSlotAccessor;
-import dev.vatuu.qui2ver.mixins.SlotAccessor;
+import dev.vatuu.qui2ver.mixins.accessors.CreativeSlotAccessor;
+import dev.vatuu.qui2ver.mixins.accessors.SlotAccessor;
 import dev.vatuu.qui2ver.capability.QuiverSlot;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;

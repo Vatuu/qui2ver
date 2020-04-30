@@ -24,11 +24,14 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.annotation.Nullable;
-
 @Mod(Qui2ver.MODID)
 @Mod.EventBusSubscriber(modid = Qui2ver.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class Qui2ver {
+
+	/*
+	TODO: Locked Creative Slots
+	TODO: Advancement
+	 */
 
 	public static final String MODID = "qui2ver";
 
@@ -70,14 +73,11 @@ public class Qui2ver {
 	static class QuiverInventoryStorage implements Capability.IStorage<IQuiverInventory> {
 
 		public INBT writeNBT(Capability<IQuiverInventory> capability, IQuiverInventory instance, Direction side) {
-			INBT nbt = ((ItemStackHandler)instance).serializeNBT();
-			System.out.println(nbt);
-			return nbt;
+			return ((ItemStackHandler)instance).serializeNBT();
 		}
 
 		public void readNBT(Capability<IQuiverInventory> capability, IQuiverInventory instance, Direction side, INBT nbt) {
 			((ItemStackHandler) instance).deserializeNBT((CompoundNBT) nbt);
-			System.out.println(nbt);
 		}
 	}
 }

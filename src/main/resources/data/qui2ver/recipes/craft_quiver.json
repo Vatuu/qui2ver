@@ -2,11 +2,7 @@
   "type": "forge:conditional",
   "recipes": [
     {
-      "conditions": [
-        {
-          "type": "forge:true"
-        }
-      ],
+      "conditions": [ { "type": "forge:true" } ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
         "pattern": [
@@ -15,19 +11,11 @@
           "il "
         ],
         "key": {
-          "s": {
-            "tag": "forge:string"
-          },
-          "l": {
-            "tag": "forge:leather"
-          },
-          "i": {
-            "tag": "forge:ingots/iron"
-          }
+          "s": { "tag": "forge:string" },
+          "l": { "tag": "forge:leather" },
+          "i": { "tag": "forge:ingots/iron"}
         },
-        "result": {
-          "item": "qui2ver:quiver"
-        }
+        "result": { "item": "qui2ver:quiver" }
       }
     }
   ]

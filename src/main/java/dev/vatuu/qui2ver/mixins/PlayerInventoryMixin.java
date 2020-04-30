@@ -6,7 +6,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.INameable;
 import net.minecraft.util.NonNullList;
 import org.spongepowered.asm.mixin.Mixin;
@@ -47,6 +46,17 @@ public abstract class PlayerInventoryMixin implements IInventory, INameable {
             if (!stack.isEmpty()) {
                 info.setReturnValue(false);
             }
+        }
+    }
+
+    @Inject(at = @At("HEAD"), method = "addItemStackToInventory", cancellable = true)
+    private void onAddItemStack(ItemStack in, CallbackInfoReturnable<Boolean> info) {
+        if(ItemStack.areItemsEqual(capability.getStackInSlot(1), in)) {
+            ItemStack remainder = capability.insertItem(1, in.copy(), false);
+            if(remainder.isEmpty())
+                info.setReturnValue(true);
+            else
+                in.shrink(in.getCount() - remainder.getCount());
         }
     }
 }

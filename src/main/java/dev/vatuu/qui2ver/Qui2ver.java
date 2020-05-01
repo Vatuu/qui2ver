@@ -5,6 +5,7 @@ import dev.vatuu.qui2ver.capability.QuiverInventory;
 import dev.vatuu.qui2ver.events.ClientEvents;
 import dev.vatuu.qui2ver.extra.QuiverLayer;
 import dev.vatuu.qui2ver.network.SSyncQuiverInvPacket;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -30,7 +31,6 @@ public class Qui2ver {
 
 	/*
 	TODO: Locked Creative Slots
-	TODO: Advancement
 	 */
 
 	public static final String MODID = "qui2ver";

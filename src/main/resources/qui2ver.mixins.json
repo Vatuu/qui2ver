@@ -12,8 +12,6 @@
     "accessors.CreativeSlotAccessor",
     "accessors.SlotAccessor"
   ],
-  "injectors": {
-    "defaultRequire": 1
-  },
+  "injectors": { "defaultRequire": 1 },
   "minVersion": "0.8"
 }

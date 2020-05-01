@@ -3,7 +3,7 @@ buildscript {
         maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
         mavenCentral()
-        maven {url='https://dist.creeper.host/Sponge/maven'}
+        maven { url='https://dist.creeper.host/Sponge/maven' }
 
     }
     dependencies {
@@ -32,11 +32,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            mods {
-                self {
-                    source sourceSets.main
-                }
-            }
+            mods { self { source sourceSets.main } }
         }
 
         server {
@@ -45,26 +41,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            mods {
-                self {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', ''
-            property 'forge.logging.console.level', 'debug'
-
-            args '--mod', 'qui2ver', '--all', '--output', file('src/main/generated_resources/'), '--existing', file('src/main/resources/')
-
-            mods {
-                self {
-                    sources sourceSets.main
-                }
-            }
+            mods { self { source sourceSets.main } }
         }
     }
 }
@@ -78,9 +55,6 @@ repositories{
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-
-    //implementation fg.deobf("vazkii.quark:Quark:r2.1-231.1063")
-    //implementation fg.deobf("vazkii.autoreglib:AutoRegLib:1.5-40.79")
 
     compile 'org.spongepowered:mixin:0.8'
 }
@@ -100,18 +74,8 @@ def reobfArtifact = artifacts.add('default', reobfFile) {
     builtBy 'reobfJar'
 }
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact reobfArtifact
-        }
-    }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
+    publications { mavenJava(MavenPublication) { artifact reobfArtifact } }
+    repositories { maven { url "file:///${project.projectDir}/mcmodsrepo" } }
 }
 
-mixin {
-    add sourceSets.main, "qui2ver.refmap.json"
-}
+mixin { add sourceSets.main, "qui2ver.refmap.json" }

@@ -1,3 +1,5 @@
 {
-  "item.qui2ver.quiver": "Quiver"
+  "item.qui2ver.quiver": "Quiver",
+  "advancements.qui2ver.fill_quiver.title": "Fill the Quiver",
+  "advancements.qui2ver.fill_quiver.description": "Fill a quiver with a stack of arrows."
 }

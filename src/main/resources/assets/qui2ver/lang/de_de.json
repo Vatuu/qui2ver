@@ -1,3 +1,5 @@
 {
-  "item.qui2ver.quiver": "Köcher"
+  "item.qui2ver.quiver": "Köcher",
+  "advancements.qui2ver.fill_quiver.title": "Fülle den Köcher",
+  "advancements.qui2ver.fill_quiver.description": "Fülle einen Köcher komplett mit Pfeilen."
 }
